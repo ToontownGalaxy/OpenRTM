@@ -9,7 +9,7 @@ RobotToon was a development tool for Disney's Toontown Online artists to create 
 
 ## Requirements
 ### ***IMPORTANT***
-* **You will need the [Toontown Realms Panda3D SDK](https://toontownrealms.com/dev/Panda3D-TTRMDev-1.11.0-py3.6-x64.exe)
+* **You will need the [Toontown Realms Panda3D SDK](https://toontownrealms.com/dev/Panda3D-TTRMDev-1.11.0-py3.6-x64.exe)**
 * Toontown phase files that include all the dna files. [These](https://github.com/open-toontown/resources) work fine. ***Toontown Rewritten's phase files do NOT contain .dna files since they use a completely different format, so you need to use them from elsewhere. Open-Toontown's resources are the closest to Toontown Online's that you can get, while also being completely updated and compatible with Panda3D 1.10.x.***
     * These phase files go in the ROOT directory of the editor
 
