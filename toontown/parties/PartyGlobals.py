@@ -4,6 +4,7 @@
 #
 # Purpose: Central repository for Toontown Party variables
 #-------------------------------------------------------------------------------
+from enum import IntEnum, auto
 from random import randint
 
 from pandac.PandaModules import Vec3
@@ -57,75 +58,86 @@ TrashCanPosition = (-0.24, 0.0, -0.65)
 TrashCanScale = 0.7
 PartyEditorTrashBounds = ((-0.16, -0.38), (-0.05, -0.56))
 
-InviteStatus = PythonUtil.Enum(
-    (
-        "NotRead",
-        "ReadButNotReplied",
-        "Accepted",
-        "Rejected",
-    ),
-)
+class ActivityRequestStatus(IntEnum):
+    Joining = 0
+    Exiting = 1
 
-InviteTheme = PythonUtil.Enum(
-    (
-        "Birthday",
-        "GenericMale",
-        "GenericFemale",
-    ),
-)
 
-PartyStatus = PythonUtil.Enum(
-    (
-        "Pending", # party's start time is still in the future
-        "Cancelled", # user cancelled this party
-        "Finished", # party started and then finished
-        "CanStart", # party can start, time is good, go button hasn't been hit yet
-        "Started", # Party has started
-        "NeverStarted", # End time has passed, party was never started
-    )
-)
+class InviteStatus(IntEnum):
+    NotRead = 0
+    ReadButNotReplied = 1
+    Accepted = 2
+    Rejected = 3
 
-# TODO For all error codes add differentiation between
-# the different ways validation and database errors can fail
-AddPartyErrorCode = PythonUtil.Enum(
-    (
-        "AllOk",
-        "ValidationError",
-        "DatabaseError",
-        "TooManyHostedParties",
-    ),
-)
 
-# used by both changePrivate and changePartyStatus
-ChangePartyFieldErrorCode = PythonUtil.Enum(
-    (
-        "AllOk",
-        "ValidationError",
-        "DatabaseError"
-    ),
-)
+class InviteTheme(IntEnum):
+    Birthday = 0
+    GenericMale = 1
+    GenericFemale = 2
+    Racing = 3
+    Valentoons = 4
+    VictoryParty = 5
+    Winter = 6
 
-ActivityTypes = PythonUtil.Enum(
-    (
-        "HostInitiated",
-        "GuestInitiated",
-        "Continuous",
-    )
-)
 
-# Note : If this enum changes, TTLocalizer PartyActivityNameDict must change too
-ActivityIds = PythonUtil.Enum(
-    (
-        "PartyJukebox",
-        "PartyCannon",
-        "PartyTrampoline",
-        "PartyCatch",
-        "PartyDance",
-        "PartyTugOfWar",
-        "PartyFireworks",
-        "PartyClock",
-    ),
-)
+class PartyStatus(IntEnum):
+    Pending = 0
+    Cancelled = 1
+    Finished = 2
+    CanStart = 3
+    Started = 4
+    NeverStarted = 5
+
+
+class AddPartyErrorCode(IntEnum):
+    AllOk = 0
+    ValidationError = 1
+    DatabaseError = 2
+    TooManyHostedParties = 3
+
+
+class ChangePartyFieldErrorCode(IntEnum):
+    AllOk = 0
+    ValidationError = 1
+    DatabaseError = 2
+    AlreadyStarted = 3
+    AlreadyRefunded = 4
+
+
+class ActivityTypes(IntEnum):
+    HostInitiated = 0
+    GuestInitiated = 1
+    Continuous = 2
+
+
+class PartyGateDenialReasons(IntEnum):
+    Unavailable = auto()
+    Full = auto()
+
+
+class ActivityIds(IntEnum):
+    PartyJukebox = 0
+    PartyCannon = 1
+    PartyTrampoline = 2
+    PartyCatch = 3
+    PartyDance = 4
+    PartyTugOfWar = 5
+    PartyFireworks = 6
+    PartyClock = 7
+    PartyJukebox40 = 8
+    PartyJukebox60 = 9
+    PartyDance20 = 10
+    PartyCog = 11
+    PartyVictoryTrampoline = 12
+    PartyWinterCatch = 13
+    PartyWinterTrampoline = 14
+    PartyWinterCog = 15
+    PartyValentineDance = 16
+    PartyValentineDance20 = 17
+    PartyValentineJukebox = 18
+    PartyValentineJukebox40 = 19
+    PartyValentineJukebox60 = 20
+    PartyValentineTrampoline = 21
 
 # a list of activity ids which we are advertising but not letting people buy
 UnreleasedActivityIds  = (
@@ -134,20 +146,44 @@ UnreleasedActivityIds  = (
     ActivityIds.PartyFireworks
     )
 
-DecorationIds = PythonUtil.Enum(
-    (
-        "BalloonAnvil",
-        "BalloonStage",
-        "Bow",
-        "Cake",
-        "Castle",
-        "GiftPile",
-        "Horn",
-        "MardiGras",
-        "NoiseMakers",
-        "Pinwheel",
-    )
-)
+
+class DecorationIds(IntEnum):
+    BalloonAnvil = 0
+    BalloonStage = 1
+    Bow = 2
+    Cake = 3
+    Castle = 4
+    GiftPile = 5
+    Horn = 6
+    MardiGras = 7
+    NoiseMakers = 8
+    Pinwheel = 9
+    GagGlobe = 10
+    BannerJellyBean = 11
+    CakeTower = 12
+    HeartTarget = 13
+    HeartBanner = 14
+    FlyingHeart = 15
+    Hydra = 16
+    BannerVictory = 17
+    CannonVictory = 18
+    CogStatueVictory = 19
+    TubeCogVictory = 20
+    cogIceCreamVictory = 21
+    cogIceCreamWinter = 22
+    StageWinter = 23
+    CogStatueWinter = 24
+    snowman = 25
+    snowDoodle = 26
+    BalloonAnvilValentine = 27
+    skybox_ttc = 28
+    skybox_mml = 29
+    skybox_br = 30
+    skybox_ddl = 31
+    skybox_hw = 32
+    skybox_sbhq = 33
+    skybox_sbhq2003 = 34
+    skybox_bbhq = 35
 
 # a list of decor ids which we are advertising but not letting people buy
 UnreleasedDecorationIds  = (
@@ -158,15 +194,12 @@ UnreleasedDecorationIds  = (
     DecorationIds.Pinwheel
     )
 
-GoToPartyStatus = PythonUtil.Enum(
-    (
-        "AllowedToGo",
-        "PartyFull",
-        "PrivateParty",
-        "PartyOver",
-        "PartyNotActive",
-    ),
-)
+class GoToPartyStatus(IntEnum):
+    AllowedToGo = 0
+    PartyFull = 1
+    PrivateParty = 2
+    PartyOver = 3
+    PartyNotActive = 4
 
 PlayGroundToPartyClockColors = {
     "the_burrrgh" : (53.0 / 255.0, 116.0 / 255.0, 148.0 / 255.0, 1.0),
@@ -271,24 +304,21 @@ for id in DecorationIds:
 ### Activities ###
 DefaultRulesTimeout = 10.0
 # why a join or exit request is denied
-DenialReasons = PythonUtil.Enum(
-    (
-        "Default",
-        "Full",
-    ),
-    start = 0,
-)
+class DenialReasons(IntEnum):
+    Default = 0
+    Full = 1
+    SilentFail = 2
+    Transformation = 3
+
 
 ### Party Fireworks
 # this enum starts at 200 to prevent clashing with Holiday name constants in
 # ToontownGlobals, as both are used in effects/FireworkShows as keys into the
 # shows dictionary
-FireworkShows = PythonUtil.Enum(
-    (
-        "NewYears",
-    ),
-    start=200,
-)
+class FireworkShows(IntEnum):
+    Summer = 200
+    NewYears = 201
+
 
 FireworksGlobalXOffset = 160.0
 FireworksGlobalYOffset = -20.0
@@ -313,13 +343,10 @@ TugOfWarMinimumPlayersPerTeam = 1
 TugOfWarMaximumPlayersPerTeam = 4
 TugOfWarStartGameTimeout = 8 # wait this many seconds after we get the minimum
                              # number of players before starting the game
-TugOfWarTeams = PythonUtil.Enum(
-    (
-        "LeftTeam",
-        "RightTeam",
-    ),
-    start=0,
-)
+class TeamActivityTeams(IntEnum):
+    LeftTeam = 0
+    RightTeam = 1
+
 TugOfWarNeitherTeam = 3 # special value indicating neither team
 TugOfWarJoinCollisionEndPoints = [
     Point3( 6.0, 0.0, 0.0),
@@ -530,14 +557,10 @@ DanceAnimToName = {
 DanceReverseLoopAnims = ["left", "right", "up", "down", "good-putt"]
 
 # Used to transfer state data between clietns
-ToonDancingStates = PythonUtil.Enum(
-    (
-        "Init",
-        "DanceMove",
-        "Run",
-        "Cleanup",
-    ),
-)
+class ToonDancingStates(IntEnum):
+    DanceMove = 0
+    Run = 1
+
 
 #===============================================================================
 # ("And be a") Jukebox ("hero, stars in his eyes")

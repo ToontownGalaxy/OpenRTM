@@ -1,0 +1,9 @@
+{
+	"name_longhand": "toonland_ttoff",
+	"storage_files": [
+		"phase_14.5/dna/ttoff_d_strg_tnl.dna", 
+		"phase_14.5/dna/ttoff_d_strg_tnl_street.dna"
+	],
+	"holiday_storage_files": {
+	}
+}
