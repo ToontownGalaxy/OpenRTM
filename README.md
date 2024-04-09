@@ -9,16 +9,9 @@ RobotToon was a development tool for Disney's Toontown Online artists to create 
 
 ## Requirements
 ### ***IMPORTANT***
-* **You need a Panda3D build that INCLUDES commit [b507c88](https://github.com/panda3d/panda3d/commit/b507c88cd9fd5d3a432aae42fdc9165422a527b4) and [7eba53c](https://github.com/panda3d/panda3d/commit/7eba53cffac5e57e1e2e192d17d4ea92a4c8d14c) as these are CRITICAL fixes for the editor. You will NOT be able to use it without these fixes!**
-* Toontown phase files that include all the dna files. [These](https://github.com/open-toontown/resources) work fine. ***Toontown Rewritten's phase files do NOT contain .dna files since they use a completely different format, so you need to use them from elsewhere. Open-Toontown's resources are the closest to Toontown Online's that you can get, while also being completely updated and compatible with Panda3d 1.10.***
-* Here you have two options:
-    * The advanced option
-        * Build yourself a copy of [libtoontown](https://github.com/OpenToontownTools/libtoontown), and drop the .pyd files in the root directory.
-        * Recent Panda3D build (1.10.7 or later) running on *__Python 3__*. This editor is NOT compatible with Python 2.x and will NOT ever be made compatible as Python 2.x is no longer supported.
-    * **OR** the easy option:
-        * you can download [my copy](https://drive.google.com/file/d/1lJ-4Ce3qLvRnvZzHCPlXAM088pCK7qr2/view?usp=sharing) of panda with the compatible libtoontown files in there. Just drag Panda3D-1.11.0-Py39-x64 to your C drive root directory and the libotp.pyd and libtoontown.pyd files to the root RTM directory. Note that the PYD files in here are ONLY compatible with MY copy of panda, so if you are using any other build you have to rebuild them yourself.
-
-~~### You can also pick up a pre-built build in the releases tab~~ *Coming Soon*
+* **You will need the [Toontown Realms Panda3D SDK](https://toontownrealms.com/dev/Panda3D-TTRMDev-1.11.0-py3.6-x64.exe)
+* Toontown phase files that include all the dna files. [These](https://github.com/open-toontown/resources) work fine. ***Toontown Rewritten's phase files do NOT contain .dna files since they use a completely different format, so you need to use them from elsewhere. Open-Toontown's resources are the closest to Toontown Online's that you can get, while also being completely updated and compatible with Panda3D 1.10.x.***
+    * These phase files go in the ROOT directory of the editor
 
 ## Credits
 * [Disyer](https://github.com/darktohka/) - Project Lead | Developer
