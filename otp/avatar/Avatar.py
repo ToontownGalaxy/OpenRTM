@@ -4,8 +4,8 @@ from pandac.PandaModules import *
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
 from direct.actor.Actor import Actor
-from libotp import Nametag, NametagGroup
-from libotp import CFSpeech, CFThought, CFTimeout, CFPageButton, CFNoQuitButton, CFQuitButton
+from panda3d.toontown import Nametag, NametagGroup
+from panda3d.toontown import CFSpeech, CFThought, CFTimeout, CFPageButton, CFNoQuitButton, CFQuitButton
 #import AvatarDNA
 from direct.distributed import ClockDelta
 from otp.avatar.ShadowCaster import ShadowCaster

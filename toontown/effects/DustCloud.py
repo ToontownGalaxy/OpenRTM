@@ -1,9 +1,13 @@
+from enum import IntEnum
+
 from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from direct.showbase import PythonUtil
 from toontown.battle.BattleProps import globalPropPool
 
-SFX = PythonUtil.Enum( 'poof, magic' )
+class SFX(IntEnum):
+    poof = 0
+    magic = 1
 
 SFXPATHS = {
     SFX.poof:'phase_4/audio/sfx/firework_distance_02.mp3',

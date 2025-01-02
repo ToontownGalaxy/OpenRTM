@@ -65,8 +65,7 @@ class RTMBase(ShowBase.ShowBase):
 
         # Import the main dlls so we don't have to repeatedly import them everywhere
         builtins.__dict__.update(__import__('panda3d.core', fromlist=['*']).__dict__)
-        builtins.__dict__.update(__import__('libotp', fromlist=['*']).__dict__)
-        builtins.__dict__.update(__import__('libtoontown', fromlist=['*']).__dict__)
+        builtins.__dict__.update(__import__('panda3d.toontown', fromlist=['*']).__dict__)
 
         self.startDirect(1, 1, 0)
         from toontown.toon import RobotToonManager

@@ -1,3 +1,5 @@
+from enum import IntEnum
+
 from pandac.PandaModules import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
@@ -43,6 +45,13 @@ Component2IconDict = {
     'affection':'Love',
     }
 
+
+class Interactions(IntEnum):
+    SCRATCH = 0
+    BEG = 1
+    EAT = 2
+    NEUTRAL = 3
+
 class Pet(Avatar.Avatar):
     """Toontown pet"""
 
@@ -50,7 +59,6 @@ class Pet(Avatar.Avatar):
 
     SerialNum = 0
 
-    Interactions = PythonUtil.Enum('SCRATCH, BEG, EAT, NEUTRAL')
     InteractAnims = { Interactions.SCRATCH: ('toPet', 'pet', 'fromPet'),
                       Interactions.BEG: ('toBeg', 'beg', 'fromBeg'),
                       Interactions.EAT: ('eat', 'swallow', 'neutral'),

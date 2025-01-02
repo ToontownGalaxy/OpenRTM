@@ -1,6 +1,6 @@
 # Is being run outside of Toontown? Then you need to create a window
 # and a base
-
+from direct.directtools.DirectGlobals import SKIP_HIDDEN, SKIP_BACKFACE, SKIP_CAMERA
 from pandac.PandaModules import *
 from direct.showbase.DirectObject import DirectObject
 from direct.showbase import ShowBase
@@ -38,8 +38,8 @@ import string
 import Pmw
 import json
 
-from libotp import *
-from libtoontown import *
+from panda3d.toontown import *
+from panda3d.toontown import *
 from toontown.leveleditor.LevelStyleManager import *
 
 from toontown.effects import Fireworks, FireworkShows, FireworkGlobals
@@ -548,8 +548,12 @@ dnaDirectory = Filename.expandFrom(DConfig.GetString("dna-directory", "$TTMODELS
 
 builtins.DNASTORE = DNASTORE = DNAStorage()
 
-loadDNAFile(DNASTORE, 'phase_4/dna/storage.dna', CSDefault, 1)
-loadDNAFile(DNASTORE, 'phase_5/dna/storage_town.dna', CSDefault, 1)
+if base.config.GetString("project") == "offline":
+    loadDNAFile(DNASTORE, 'phase_4/dna/ttrm_d_strg.dna', CSDefault, 1)
+    loadDNAFile(DNASTORE, 'phase_5/dna/ttrm_d_strg_town.dna', CSDefault, 1)
+else:
+    loadDNAFile(DNASTORE, 'phase_4/dna/storage.dna', CSDefault, 1)
+    loadDNAFile(DNASTORE, 'phase_5/dna/storage_town.dna', CSDefault, 1)
 
 builtins.NEIGHBORHOODS = []
 NEIGHBORHOOD_CODES = {}
@@ -1090,31 +1094,22 @@ class RobotToonManager(DirectObject):
         # And define a bunch of cells along the margins.
         mm = self.marginManager
         self.leftCells = [
-            mm.addGridCell(0, 1, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop),
-            mm.addGridCell(0, 2, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop),
-            mm.addGridCell(0, 3, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop)
-            ]
-        self.bottomCells = [
-            mm.addGridCell(0.5, 0, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop),
-            mm.addGridCell(1.5, 0, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop),
-            mm.addGridCell(2.5, 0, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop),
-            mm.addGridCell(3.5, 0, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop),
-            mm.addGridCell(4.5, 0, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop)
-            ]
+            mm.addGridCell(0, 1, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopLeft, (0.222222, 0, -1.5)),
+            mm.addGridCell(0, 2, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopLeft, (0.222222, 0, -1.16667)),
+            mm.addGridCell(0, 3, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopLeft, (0.222222, 0, -0.833333)),
+            mm.addGridCell(0, 3, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopLeft, (0.222222, 0, -0.5)),
+        ]
+        self.bottomCells = [mm.addGridCell(0.5, 0, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dBottomCenter, (-0.888889, 0, 0.16667)),
+                            mm.addGridCell(1.5, 0, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dBottomCenter, (-0.444444, 0, 0.16667)),
+                            mm.addGridCell(2.5, 0, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dBottomCenter, (0, 0, 0.16667)),
+                            mm.addGridCell(3.5, 0, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dBottomCenter, (0.444444, 0, 0.16667)),
+                            mm.addGridCell(4.5, 0, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dBottomCenter, (0.888889, 0, 0.16667))]
         self.rightCells = [
-            mm.addGridCell(5, 2, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop),
-            mm.addGridCell(5, 1, base.a2dLeft, base.a2dRight,
-                           base.a2dBottom, base.a2dTop)
-            ]
+            mm.addGridCell(5, 1, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopRight, (-0.222222, 0, -1.5)),
+            mm.addGridCell(5, 2, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopRight, (-0.222222, 0, -1.16667)),
+            mm.addGridCell(5, 2, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopRight, (-0.222222, 0, -0.833333)),
+            mm.addGridCell(5, 2, -1.33333333333, 1.33333333333, -1.0, 1.0, base.a2dTopRight, (-0.222222, 0, -0.5))
+        ]
 
     def faceCamera(self):
         toon = self.selectedToon
